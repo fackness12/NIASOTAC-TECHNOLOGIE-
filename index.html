@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIASOTAC TECHNOLOGIE | Matériel Informatique & Accessoires</title>
+    <!-- Chargement de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chargement de la police Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icônes Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0F172A',
+                            blue: '#2563EB',
+                            light: '#F8FAFC',
+                        },
+                        whatsapp: {
+                            DEFAULT: '#25D366',
+                            dark: '#1EBE5D',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- Bannière supérieure d'information -->
+    <div class="bg-[#0F172A] text-white text-xs sm:text-sm py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-[#25D366] animate-pulse"></span>
+                <span>Livraison rapide à <strong>Abomey-Calavi, Cotonou & Porto-Novo</strong></span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://wa.me/229019614557" target="_blank" rel="noopener" id="top-whatsapp-link" class="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold transition">
+                    <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                    <span id="top-whatsapp-display">WhatsApp : 01 96 14 55 57</span>
+                </a>
+                <span class="text-slate-600 hidden sm:inline">|</span>
+                <button onclick="openAdminModal()" class="text-blue-400 hover:text-blue-300 underline font-medium flex items-center gap-1 transition">
+                    <i data-lucide="settings" class="w-3.5 h-3.5"></i>
+                    <span>Gérer le catalogue</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- En-tête principal (Header Sticky) -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+            <div class="flex items-center justify-between gap-3 sm:gap-6">
+                <!-- Logo & Nom de la boutique -->
+                <a href="#" onclick="resetFilters(event)" class="flex items-center gap-2.5 shrink-0 group">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-[#0F172A] to-[#2563EB] flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 id="header-store-name" class="text-base sm:text-xl font-extrabold tracking-tight text-[#0F172A] leading-none">
+                            NIASOTAC TECHNOLOGIE
+                        </h1>
+                        <p class="text-[11px] text-slate-500 font-medium mt-0.5 flex items-center gap-1.5">
+                            <span>Électronique & Informatique</span>
+                            <span class="hidden sm:inline text-slate-300">•</span>
+                            <span class="hidden sm:inline text-emerald-600 font-semibold" id="header-phone-text">01 96 14 55 57</span>
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Barre de recherche (Desktop & Tablette) -->
+                <div class="hidden md:flex flex-1 max-w-xl relative">
+                    <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                    <input 
+                        type="text" 
+                        id="search-input-desktop"
+                        oninput="handleSearch(this.value)"
+                        placeholder="Rechercher un PC HP/Dell, SSD 1To, chargeur 65W, souris..." 
+                        class="w-full pl-10 pr-10 py-2.5 bg-slate-100 border border-transparent focus:bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 rounded-xl text-sm transition outline-none"
+                    >
+                    <button id="clear-search-desktop" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Actions Droite : Contact rapide & Panier -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <button onclick="contactDirectWhatsApp()" class="hidden sm:flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-semibold text-xs lg:text-sm transition border border-emerald-200">
+                        <i data-lucide="message-circle" class="w-4 h-4 text-[#25D366] fill-current"></i>
+                        <span id="header-btn-phone">01 96 14 55 57</span>
+                    </button>
+
+                    <button onclick="toggleCart(true)" class="relative flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white font-semibold text-sm shadow-sm transition active:scale-95">
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">Panier</span>
+                        <span id="cart-badge" class="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 text-xs font-bold bg-[#25D366] text-[#0F172A] rounded-full">
+                            0
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Barre de recherche Mobile -->
+            <div class="mt-3 md:hidden relative">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                <input 
+                    type="text" 
+                    id="search-input-mobile"
+                    oninput="handleSearch(this.value)"
+                    placeholder="Rechercher un produit, une marque..." 
+                    class="w-full pl-10 pr-9 py-2 bg-slate-100 border border-transparent focus:bg-white focus:border-[#2563EB] rounded-xl text-sm transition outline-none"
+                >
+                <button id="clear-search-mobile" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Hero compacte -->
+    <section class="bg-gradient-to-r from-[#0F172A] via-slate-900 to-[#1E3A8A] text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="max-w-2xl">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-400/30 mb-3">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> NIASOTAC TECHNOLOGIE • Matériel Garanti
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight">
+                    Votre partenaire informatique & accessoires électroniques au Bénin.
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base mt-2">
+                    Ordinateurs portables, disques durs SSD/HDD, chargeurs d'origine et périphériques. Commandez directement sur WhatsApp au <strong class="text-white" id="hero-phone">01 96 14 55 57</strong>.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-3 text-xs sm:text-sm shrink-0">
+                <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl px-4 py-3">
+                    <div class="font-bold text-white flex items-center gap-1.5">
+                        <i data-lucide="truck" class="w-4 h-4 text-[#25D366]"></i> Livraison Express
+                    </div>
+                    <div class="text-slate-300 text-xs mt-0.5">Abomey-Calavi & Cotonou</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl px-4 py-3">
+                    <div class="font-bold text-white flex items-center gap-1.5">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-400"></i> Qualité Certifiée
+                    </div>
+                    <div class="text-slate-300 text-xs mt-0.5">Neuf & Venant Grade A+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        
+        <!-- Barre de Filtres & Tri -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+            <!-- Onglets Catégories -->
+            <div id="category-filters" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                <!-- Généré dynamiquement par JS -->
+            </div>
+
+            <!-- Compteur & Tri par prix -->
+            <div class="flex items-center justify-between sm:justify-end gap-3 shrink-0">
+                <span id="results-count" class="text-xs sm:text-sm text-slate-500 font-medium">
+                    0 produit
+                </span>
+                <div class="flex items-center gap-2">
+                    <label for="sort-select" class="text-xs text-slate-500 hidden sm:inline">Trier :</label>
+                    <select 
+                        id="sort-select" 
+                        onchange="handleSort(this.value)"
+                        class="bg-white border border-slate-200 text-slate-700 text-xs sm:text-sm font-medium rounded-xl px-3 py-2 outline-none focus:border-[#2563EB] shadow-sm cursor-pointer"
+                    >
+                        <option value="featured">Pertinence</option>
+                        <option value="price-asc">Prix : Croissant</option>
+                        <option value="price-desc">Prix : Décroissant</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grille des Produits -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+            <!-- Les cartes produits sont injectées ici par JS -->
+        </div>
+
+        <!-- État vide si aucun résultat -->
+        <div id="empty-state" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+                <i data-lucide="search-x" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800">Aucun produit trouvé</h3>
+            <p class="text-slate-500 text-sm mt-1 max-w-md mx-auto">
+                Nous n'avons trouvé aucun article correspondant à votre recherche. Essayez un autre mot-clé ou réinitialisez les filtres.
+            </p>
+            <button onclick="resetFilters()" class="mt-5 px-5 py-2.5 bg-[#2563EB] hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition">
+                Afficher tout le catalogue
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Pied de page (Footer) -->
+    <footer class="bg-white border-t border-slate-200 mt-12 pb-20 sm:pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-600">
+            <div class="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
+                <span class="font-extrabold text-[#0F172A]" id="footer-store-name">NIASOTAC TECHNOLOGIE</span>
+                <span class="hidden sm:inline text-slate-300">•</span>
+                <span>Abomey-Calavi / Cotonou, Bénin</span>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <button onclick="contactDirectWhatsApp()" class="inline-flex items-center gap-1.5 text-emerald-700 hover:text-emerald-800 font-semibold transition">
+                    <i data-lucide="message-circle" class="w-4 h-4 text-[#25D366]"></i>
+                    <span id="footer-whatsapp-display">WhatsApp : 01 96 14 55 57</span>
+                </button>
+                <span class="text-slate-300">|</span>
+                <button onclick="openAdminModal()" class="text-slate-500 hover:text-[#2563EB] font-medium transition">
+                    Gérer le catalogue
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bouton Flottant WhatsApp Direct (Mobile & Desktop) -->
+    <button 
+        onclick="contactDirectWhatsApp()" 
+        title="Discuter avec NIASOTAC TECHNOLOGIE sur WhatsApp"
+        class="fixed bottom-5 right-5 z-30 flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold px-4 py-3.5 rounded-full shadow-xl shadow-emerald-600/30 transition-transform hover:scale-105 active:scale-95"
+    >
+        <i data-lucide="message-circle" class="w-6 h-6 fill-current"></i>
+        <span class="text-xs sm:text-sm pr-1" id="floating-wa-text">01 96 14 55 57</span>
+    </button>
+
+    <!-- ===================================================================== -->
+    <!-- MODALE DÉTAILS DU PRODUIT                                             -->
+    <!-- ===================================================================== -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100">
+            <div id="product-modal-content">
+                <!-- Contenu injecté dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- TIROIR LATÉRAL PANIER (CART DRAWER)                                   -->
+    <!-- ===================================================================== -->
+    <div id="cart-overlay" onclick="toggleCart(false)" class="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-xs hidden transition-opacity"></div>
+    
+    <aside id="cart-drawer" class="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <!-- Header Panier -->
+        <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+            <div class="flex items-center gap-2.5">
+                <i data-lucide="shopping-bag" class="w-5 h-5 text-[#2563EB]"></i>
+                <div>
+                    <h3 class="font-bold text-base sm:text-lg text-[#0F172A] leading-tight">Votre Panier</h3>
+                    <p class="text-[11px] text-slate-500">NIASOTAC TECHNOLOGIE</p>
+                </div>
+                <span id="drawer-cart-count" class="text-xs font-semibold px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full ml-1">0</span>
+            </div>
+            <button onclick="toggleCart(false)" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 rounded-xl transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Corps du panier (scrollable) -->
+        <div class="flex-1 overflow-y-auto p-5 space-y-6">
+            <!-- Liste des articles -->
+            <div id="cart-items-container" class="space-y-3">
+                <!-- Articles injectés par JS -->
+            </div>
+
+            <!-- Formulaire Client -->
+            <div id="checkout-form-section" class="hidden pt-4 border-t border-slate-200 space-y-4">
+                <h4 class="font-bold text-sm text-[#0F172A] flex items-center gap-2">
+                    <i data-lucide="map-pin" class="w-4 h-4 text-[#2563EB]"></i>
+                    Informations de livraison
+                </h4>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nom complet *</label>
+                    <input type="text" id="client-name" placeholder="Ex: Jean Koffi" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:border-[#2563EB] outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Quartier / Ville de livraison *</label>
+                    <input type="text" id="client-location" placeholder="Ex: Abomey-Calavi Bidossessi, Cotonou Akpakpa, Fidjrossè..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:border-[#2563EB] outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">Mode de réception</label>
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="delivery-mode" value="Livraison à domicile" checked class="peer sr-only">
+                            <div class="p-2.5 text-center text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 peer-checked:border-[#2563EB] peer-checked:bg-blue-50 peer-checked:text-[#2563EB] transition">
+                                🛵 Livraison à domicile
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="delivery-mode" value="Retrait en boutique" class="peer sr-only">
+                            <div class="p-2.5 text-center text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 peer-checked:border-[#2563EB] peer-checked:bg-blue-50 peer-checked:text-[#2563EB] transition">
+                                🏪 Retrait en boutique
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Panier & Bouton WhatsApp -->
+        <div id="cart-footer" class="hidden p-5 border-t border-slate-200 bg-slate-50 space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-sm text-slate-600 font-medium">Total estimé :</span>
+                <span id="cart-total-price" class="text-xl font-extrabold text-[#0F172A]">0 FCFA</span>
+            </div>
+            <p class="text-[11px] text-slate-500">
+                Votre commande sera transmise directement à <strong>NIASOTAC TECHNOLOGIE</strong> sur WhatsApp (<span id="drawer-phone-label">01 96 14 55 57</span>).
+            </p>
+            <button onclick="sendWhatsAppOrder()" class="w-full py-3.5 px-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold rounded-xl shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2.5 transition active:scale-[0.99]">
+                <i data-lucide="message-circle" class="w-5 h-5 fill-current"></i>
+                <span>Commander sur WhatsApp</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ===================================================================== -->
+    <!-- MODALE ADMIN / GÉRER LE CATALOGUE                                     -->
+    <!-- ===================================================================== -->
+    <div id="admin-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 bg-blue-50 text-[#2563EB] rounded-lg">
+                        <i data-lucide="sliders" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-[#0F172A]">Gérer le catalogue</h3>
+                        <p class="text-xs text-slate-500">Configuration NIASOTAC TECHNOLOGIE (sauvegarde locale)</p>
+                    </div>
+                </div>
+                <button onclick="closeAdminModal()" class="p-2 text-slate-400 hover:text-slate-700 rounded-xl">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Paramètres généraux -->
+            <div class="mt-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nom de la boutique</label>
+                    <input type="text" id="admin-store-name" class="w-full px-3.5 py-2 border border-slate-200 rounded-xl text-sm focus:border-[#2563EB] outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Numéro WhatsApp (format international Bénin sans +)</label>
+                    <input type="text" id="admin-whatsapp-number" placeholder="2290196145557" class="w-full px-3.5 py-2 border border-slate-200 rounded-xl text-sm focus:border-[#2563EB] outline-none">
+                    <p class="text-[11px] text-slate-400 mt-1">Par défaut : 2290196145557 (01 96 14 55 57)</p>
+                </div>
+                <button onclick="saveStoreSettings()" class="w-full py-2.5 bg-[#0F172A] hover:bg-slate-800 text-white text-sm font-semibold rounded-xl transition">
+                    Enregistrer les paramètres
+                </button>
+            </div>
+
+            <!-- Ajouter un produit rapidement -->
+            <div class="mt-6 pt-5 border-t border-slate-200 space-y-3">
+                <h4 class="font-bold text-sm text-[#0F172A]">+ Ajouter un nouvel article au catalogue</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="sm:col-span-2">
+                        <input type="text" id="new-prod-name" placeholder="Nom du produit (ex: Dell Latitude 5420)" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#2563EB]">
+                    </div>
+                    <div>
+                        <select id="new-prod-category" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#2563EB] bg-white">
+                            <option value="Ordinateurs">Ordinateurs</option>
+                            <option value="Stockage">Stockage</option>
+                            <option value="Chargeurs & Adaptateurs">Chargeurs & Adaptateurs</option>
+                            <option value="Souris & Claviers">Souris & Claviers</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select id="new-prod-condition" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#2563EB] bg-white">
+                            <option value="Neuf">Neuf</option>
+                            <option value="Venant garanti">Venant garanti</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="number" id="new-prod-price" placeholder="Prix en FCFA (ex: 240000)" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#2563EB]">
+                    </div>
+                    <div>
+                        <input type="text" id="new-prod-specs" placeholder="Specs courtes (ex: Core i5 • 16Go • 512Go)" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#2563EB]">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <input type="url" id="new-prod-image" placeholder="Lien URL de l'image (optionnel - illustration auto sinon)" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#2563EB]">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <textarea id="new-prod-desc" rows="2" placeholder="Description détaillée / Garantie..." class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#2563EB]"></textarea>
+                    </div>
+                </div>
+                <button onclick="addNewProduct()" class="w-full py-2.5 bg-[#2563EB] hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition">
+                    Publier l'article dans le catalogue
+                </button>
+            </div>
+
+            <!-- Réinitialisation -->
+            <div class="mt-6 pt-4 border-t border-slate-200 flex justify-between items-center">
+                <span class="text-xs text-slate-400">Catalogue NIASOTAC TECHNOLOGIE</span>
+                <button onclick="resetDemoData()" class="text-xs text-red-600 hover:underline font-medium">
+                    Réinitialiser les articles par défaut
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast (Remplace alert()) -->
+    <div id="toast-container" class="fixed bottom-20 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none w-[90%] max-w-sm"></div>
+
+    <!-- ===================================================================== -->
+    <!-- LOGIQUE JAVASCRIPT                                                    -->
+    <!-- ===================================================================== -->
+    <script>
+        // 1. CONFIGURATION OFFICIELLE NIASOTAC TECHNOLOGIE
+        const DEFAULT_CONFIG = {
+            storeName: "NIASOTAC TECHNOLOGIE",
+            whatsappNumber: "2290196145557" // +229 01 96 14 55 57
+        };
+
+        const CATEGORIES = [
+            { id: "Tout", label: "Tout le catalogue", icon: "layout-grid" },
+            { id: "Ordinateurs", label: "Ordinateurs", icon: "laptop" },
+            { id: "Stockage", label: "Stockage", icon: "hard-drive" },
+            { id: "Chargeurs & Adaptateurs", label: "Chargeurs & Adaptateurs", icon: "plug-zap" },
+            { id: "Souris & Claviers", label: "Souris & Claviers", icon: "mouse" }
+        ];
+
+        // Catalogue complet d'articles électroniques en FCFA
+        const DEFAULT_PRODUCTS = [
+            // --- 1. ORDINATEURS ---
+            {
+                id: 101,
+                name: "HP EliteBook 840 G8",
+                category: "Ordinateurs",
+                condition: "Venant garanti",
+                inStock: true,
+                price: 285000,
+                shortSpecs: "Core i7-1165G7 • 16Go RAM • 512Go SSD NVMe • Écran 14\" FHD",
+                description: "Ultrabook professionnel en aluminium, ultra-rapide et élégant. Écran 14 pouces Full HD antireflet, clavier rétroéclairé, lecteur d'empreinte digitale. Batterie longue autonomie testée. Livré avec chargeur d'origine.",
+                fullSpecs: {
+                    "Processeur": "Intel Core i7-1165G7 (11ème Gén, jusqu'à 4.7 GHz)",
+                    "Mémoire RAM": "16 Go DDR4",
+                    "Stockage": "512 Go SSD NVMe Ultra-rapide",
+                    "Écran": "14\" Full HD (1920 x 1080) IPS Antireflet",
+                    "État & Garantie": "Venant Grade A+ • Garantie NIASOTAC 3 mois"
+                },
+                visualType: "laptop"
+            },
+            {
+                id: 102,
+                name: "Dell Latitude 5420 Pro",
+                category: "Ordinateurs",
+                condition: "Venant garanti",
+                inStock: true,
+                price: 245000,
+                shortSpecs: "Core i5-1145G7 • 16Go RAM • 256Go SSD • Écran 14\" FHD",
+                description: "PC portable professionnel robuste et performant conçu pour le travail intensif, la bureautique avancée et la programmation. Connectique complète (2x Thunderbolt 4, HDMI, RJ45, USB 3.2).",
+                fullSpecs: {
+                    "Processeur": "Intel Core i5-1145G7 (11ème Gén, 4 cœurs)",
+                    "Mémoire RAM": "16 Go DDR4 (extensible jusqu'à 64 Go)",
+                    "Stockage": "256 Go SSD NVMe PCIe",
+                    "Écran": "14\" Full HD (1920 x 1080)",
+                    "État & Garantie": "Venant Grade A+ • Garantie NIASOTAC 3 mois"
+                },
+                visualType: "laptop"
+            },
+            {
+                id: 103,
+                name: "Lenovo ThinkPad T14 Gen 2",
+                category: "Ordinateurs",
+                condition: "Venant garanti",
+                inStock: true,
+                price: 260000,
+                shortSpecs: "Core i5-1135G7 • 16Go RAM • 512Go SSD • Clavier rétroéclairé",
+                description: "La référence mondiale de fiabilité pour professionnels, ingénieurs et étudiants. Clavier ThinkPad ultra-confortable, châssis renforcé, sécurité biométrique et excellente autonomie.",
+                fullSpecs: {
+                    "Processeur": "Intel Core i5-1135G7 (11ème Gén)",
+                    "Mémoire RAM": "16 Go DDR4",
+                    "Stockage": "512 Go SSD NVMe",
+                    "Écran": "14\" Full HD IPS",
+                    "État & Garantie": "Venant Grade A+ • Garantie NIASOTAC 3 mois"
+                },
+                visualType: "laptop"
+            },
+            {
+                id: 104,
+                name: "Apple MacBook Pro 13\" Puce M1",
+                category: "Ordinateurs",
+                condition: "Venant garanti",
+                inStock: true,
+                price: 490000,
+                shortSpecs: "Puce Apple M1 • 8Go RAM • 256Go SSD • Écran Retina • Touch Bar",
+                description: "Puissance fulgurante et silence absolu grâce à la puce Apple M1. Autonomie exceptionnelle jusqu'à 15h, écran Retina haute luminosité, Touch Bar et capteur Touch ID.",
+                fullSpecs: {
+                    "Processeur": "Puce Apple M1 (CPU 8 cœurs / GPU 8 cœurs)",
+                    "Mémoire unifiée": "8 Go",
+                    "Stockage": "256 Go SSD",
+                    "Écran": "13.3\" Retina True Tone",
+                    "État & Garantie": "Venant impeccable • Garantie NIASOTAC 3 mois"
+                },
+                visualType: "laptop"
+            },
+
+            // --- 2. STOCKAGE ---
+            {
+                id: 201,
+                name: "Disque Dur Externe 1 To USB 3.0",
+                category: "Stockage",
+                condition: "Neuf",
+                inStock: true,
+                price: 38000,
+                shortSpecs: "Capacité 1 To (1000 Go) • USB 3.0 Haute Vitesse • Format 2.5\"",
+                description: "Sauvegardez tous vos fichiers, vidéos, photos et logiciels en toute sécurité. Fonctionne immédiatement sans installation sur Windows, Mac et Smart TV.",
+                fullSpecs: {
+                    "Capacité": "1 To (1000 Go)",
+                    "Interface": "USB 3.0 / USB 3.2 Gen 1 (rétrocompatible USB 2.0)",
+                    "Alimentation": "Auto-alimenté via port USB",
+                    "Contenu": "Disque dur neuf sous scellé + Câble USB 3.0",
+                    "Garantie": "6 mois"
+                },
+                visualType: "hdd"
+            },
+            {
+                id: 202,
+                name: "Disque Dur Externe 2 To USB 3.0",
+                category: "Stockage",
+                condition: "Neuf",
+                inStock: true,
+                price: 55000,
+                shortSpecs: "Capacité 2 To (2000 Go) • USB 3.0 Ultra-rapide • Boîtier Slim",
+                description: "Grande capacité de stockage portable de 2 Téraoctets dans un format fin et léger. Idéal pour les professionnels de l'image, archivage et sauvegardes complètes.",
+                fullSpecs: {
+                    "Capacité": "2 To (2000 Go)",
+                    "Interface": "USB 3.0 Haute Vitesse (jusqu'à 5 Gbit/s)",
+                    "Compatibilité": "Windows 10/11, macOS, Linux, Consoles",
+                    "Garantie": "6 mois"
+                },
+                visualType: "hdd"
+            },
+            {
+                id: 203,
+                name: "Disque SSD NVMe M.2 512 Go",
+                category: "Stockage",
+                condition: "Neuf",
+                inStock: true,
+                price: 32000,
+                shortSpecs: "Format M.2 2280 • PCIe NVMe • Lecture jusqu'à 3500 Mo/s",
+                description: "Boostez considérablement la rapidité de votre ordinateur portable ou fixe. Démarrage du système en quelques secondes et ouverture instantanée des logiciels.",
+                fullSpecs: {
+                    "Format": "M.2 2280",
+                    "Interface": "PCIe Gen3/Gen4 NVMe",
+                    "Vitesse": "Jusqu'à 3500 Mo/s en lecture",
+                    "Service": "Montage disponible sur demande",
+                    "Garantie": "1 an"
+                },
+                visualType: "ssd"
+            },
+            {
+                id: 204,
+                name: "Clé USB 3.2 Haute Vitesse 64 Go / 128 Go",
+                category: "Stockage",
+                condition: "Neuf",
+                inStock: true,
+                price: 9500,
+                shortSpecs: "128 Go • Boîtier Métal Robuste • Transfert Rapide USB 3.2",
+                description: "Clé USB compacte et résistante aux chocs avec anneau porte-clés. Transfert rapide de vos documents, cours, musiques et vidéos.",
+                fullSpecs: {
+                    "Capacité": "128 Go (version 64 Go aussi disponible)",
+                    "Norme": "USB 3.2 Gen 1",
+                    "Finition": "Métal brossé anti-choc",
+                    "Garantie": "6 mois"
+                },
+                visualType: "usb"
+            },
+
+            // --- 3. CHARGEURS & ADAPTATEURS ---
+            {
+                id: 301,
+                name: "Chargeur HP Embout Bleu 65W Original",
+                category: "Chargeurs & Adaptateurs",
+                condition: "Neuf",
+                inStock: true,
+                price: 15000,
+                shortSpecs: "19.5V 3.33A (65W) • Embout 4.5mm x 3.0mm (Blue Tip)",
+                description: "Chargeur secteur d'origine haute fiabilité pour ordinateurs portables HP EliteBook, ProBook, Pavilion et Envy avec connecteur fin à pointe bleue.",
+                fullSpecs: {
+                    "Puissance": "65 Watts (19.5V - 3.33A)",
+                    "Connecteur": "4.5mm x 3.0mm avec pin central (Embout bleu)",
+                    "Sécurité": "Protection contre surtension et surchauffe",
+                    "Inclus": "Bloc secteur + Cordon d'alimentation",
+                    "Garantie": "6 mois"
+                },
+                visualType: "charger"
+            },
+            {
+                id: 302,
+                name: "Chargeur Universel USB-C 65W / 100W Rapide",
+                category: "Chargeurs & Adaptateurs",
+                condition: "Neuf",
+                inStock: true,
+                price: 19000,
+                shortSpecs: "Power Delivery (PD) • Compatible HP, Dell, Lenovo, MacBook",
+                description: "Chargeur USB Type-C intelligent qui adapte automatiquement sa puissance à votre appareil (PC portable, MacBook, iPad ou smartphone). Charge rapide et sécurisée.",
+                fullSpecs: {
+                    "Puissance": "65W (Version 100W GaN disponible à 25 000 FCFA)",
+                    "Connectique": "USB Type-C Power Delivery 3.0",
+                    "Compatibilité": "Lenovo ThinkPad, HP EliteBook, Dell Latitude, MacBook Air/Pro",
+                    "Garantie": "6 mois"
+                },
+                visualType: "charger"
+            },
+            {
+                id: 303,
+                name: "Adaptateur HDMI vers VGA + Audio",
+                category: "Chargeurs & Adaptateurs",
+                condition: "Neuf",
+                inStock: true,
+                price: 5500,
+                shortSpecs: "Full HD 1080p • Sortie Jack Audio 3.5mm • Plug & Play",
+                description: "Connectez facilement votre ordinateur portable récent (port HDMI) à un vidéoprojecteur ou un écran externe VGA. Idéal pour les présentations, salles de conférence et cours.",
+                fullSpecs: {
+                    "Entrée": "HDMI Mâle",
+                    "Sortie": "VGA Femelle + Sortie Audio Jack 3.5mm",
+                    "Résolution": "Jusqu'à 1920 x 1080 (Full HD 1080p)",
+                    "Installation": "Aucune installation requise (Plug & Play)"
+                },
+                visualType: "adapter"
+            },
+            {
+                id: 304,
+                name: "Hub Adaptateur USB-C Multiport 7-en-1",
+                category: "Chargeurs & Adaptateurs",
+                condition: "Neuf",
+                inStock: true,
+                price: 16500,
+                shortSpecs: "HDMI 4K • 3x USB 3.0 • Lecteur Carte SD/TF • Charge PD 100W",
+                description: "Étendez les ports de votre PC moderne (MacBook, Dell XPS, HP) avec cet adaptateur en aluminium : branchez clé USB, écran HDMI, carte mémoire et chargeur en même temps.",
+                fullSpecs: {
+                    "Vidéo": "1x HDMI 4K Ultra HD",
+                    "Données": "3x Ports USB 3.0 Haute Vitesse + Lecteur SD / MicroSD",
+                    "Alimentation": "1x Port USB-C Power Delivery jusqu'à 100W",
+                    "Matériau": "Aluminium anodisé"
+                },
+                visualType: "adapter"
+            },
+
+            // --- 4. SOURIS & CLAVIERS ---
+            {
+                id: 401,
+                name: "Souris Sans Fil Logitech Ergonomique",
+                category: "Souris & Claviers",
+                condition: "Neuf",
+                inStock: true,
+                price: 12000,
+                shortSpecs: "Sans fil 2.4 GHz • Récepteur Nano USB • Précision Optique",
+                description: "Souris sans fil confortable et précise signée Logitech. Prise en main ambidextre agréable, faible consommation d'énergie et portée sans fil fiable jusqu'à 10 mètres.",
+                fullSpecs: {
+                    "Marque": "Logitech",
+                    "Connexion": "Sans fil 2.4 GHz via récepteur Nano USB",
+                    "Compatibilité": "Windows, macOS, Linux, ChromeOS",
+                    "Garantie": "6 mois"
+                },
+                visualType: "mouse"
+            },
+            {
+                id: 402,
+                name: "Pack Clavier + Souris Sans Fil",
+                category: "Souris & Claviers",
+                condition: "Neuf",
+                inStock: true,
+                price: 22000,
+                shortSpecs: "Clavier AZERTY complet + Souris • 1 seul récepteur USB",
+                description: "Ensemble bureau sans fil élégant et silencieux. Le clavier dispose d'un pavé numérique complet et de touches multimédias. Un seul mini-récepteur USB connecte les deux appareils.",
+                fullSpecs: {
+                    "Disposition clavier": "AZERTY Français avec pavé numérique",
+                    "Connexion": "Sans fil 2.4 GHz (récepteur unique)",
+                    "Autonomie": "Longue durée avec mode veille intelligent",
+                    "Garantie": "6 mois"
+                },
+                visualType: "keyboard"
+            },
+            {
+                id: 403,
+                name: "Clavier Mécanique Rétroéclairé RGB",
+                category: "Souris & Claviers",
+                condition: "Neuf",
+                inStock: true,
+                price: 28000,
+                shortSpecs: "Switchs réactifs • Rétroéclairage LED réglable • Châssis robuste",
+                description: "Confort de frappe exceptionnel pour les développeurs, rédacteurs et gamers. Rétroéclairage LED multi-modes pour travailler aisément même dans l'obscurité.",
+                fullSpecs: {
+                    "Type": "Clavier mécanique filaire USB renforcé",
+                    "Éclairage": "Rétroéclairage LED avec plusieurs effets et intensités",
+                    "Technologie": "Anti-ghosting intégral",
+                    "Garantie": "6 mois"
+                },
+                visualType: "keyboard"
+            },
+            {
+                id: 404,
+                name: "Tapis de Souris Grand Format Antidérapant",
+                category: "Souris & Claviers",
+                condition: "Neuf",
+                inStock: true,
+                price: 4500,
+                shortSpecs: "Surface micro-tissée haute précision • Base caoutchouc • Bords cousus",
+                description: "Améliore la glisse et la précision de votre souris tout en protégeant votre bureau. Bords surpiqués résistants à l'usure et base en caoutchouc antidérapante.",
+                fullSpecs: {
+                    "Surface": "Tissu micro-texturé haute densité",
+                    "Base": "Caoutchouc naturel antidérapant",
+                    "Finition": "Bords cousus anti-effilochage"
+                },
+                visualType: "mousepad"
+            }
+        ];
+
+        // 2. ÉTAT DE L'APPLICATION (STATE)
+        // Nettoyage d'une ancienne config par défaut si elle existait avant la personnalisation NIASOTAC
+        const savedConfigRaw = localStorage.getItem('niasotac_config');
+        let storeConfig = savedConfigRaw ? JSON.parse(savedConfigRaw) : { ...DEFAULT_CONFIG };
+
+        const savedProductsRaw = localStorage.getItem('niasotac_products');
+        let products = savedProductsRaw ? JSON.parse(savedProductsRaw) : [...DEFAULT_PRODUCTS];
+
+        let cart = JSON.parse(localStorage.getItem('niasotac_cart')) || [];
+        
+        let currentCategory = "Tout";
+        let currentSearch = "";
+        let currentSort = "featured";
+
+        // 3. FORMATAGE DU NUMÉRO WHATSAPP BÉNINOIS POUR AFFICHAGE
+        function formatBeninPhoneDisplay(rawNumber) {
+            const digits = (rawNumber || "").replace(/\D/g, '');
+            // Si format 2290196145557 -> 01 96 14 55 57
+            if (digits.startsWith('229') && digits.length === 13) {
+                const local = digits.slice(3); // 0196145557
+                return local.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+            }
+            if (digits.length === 10) {
+                return digits.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+            }
+            return rawNumber;
+        }
+
+        // 4. GÉNÉRATEUR VISUEL PRODUIT (Image URL personnalisée ou Illustration SVG Tech propre)
+        function getProductVisual(product) {
+            if (product.imageUrl && product.imageUrl.trim() !== "") {
+                return `
+                    <div class="w-full h-44 bg-slate-100 flex items-center justify-center relative overflow-hidden border-b border-slate-100">
+                        <img 
+                            src="${product.imageUrl}" 
+                            alt="${product.name}" 
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        >
+                        <div class="hidden w-full h-full items-center justify-center bg-gradient-to-br from-slate-100 to-blue-50 text-slate-400">
+                            <i data-lucide="cpu" class="w-12 h-12"></i>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const vType = product.visualType || (
+                product.category === "Ordinateurs" ? "laptop" :
+                product.category === "Stockage" ? "ssd" :
+                product.category === "Chargeurs & Adaptateurs" ? "charger" : "mouse"
+            );
+
+            const designs = {
+                laptop: {
+                    bg: "from-slate-100 to-blue-50",
+                    svg: `<svg viewBox="0 0 200 140" class="w-36 h-28 drop-shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <rect x="32" y="18" width="136" height="86" rx="8" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+                            <rect x="38" y="24" width="124" height="72" rx="4" fill="url(#screenGrad)"/>
+                            <defs>
+                                <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#1E3A8A"/>
+                                    <stop offset="100%" stop-color="#3B82F6"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="21" r="1.5" fill="#64748B"/>
+                            <path d="M18 104 H182 L174 114 C172 116 169 117 166 117 H34 C31 117 28 116 26 114 L18 104 Z" fill="#CBD5E1"/>
+                            <rect x="82" y="104" width="36" height="4" rx="2" fill="#94A3B8"/>
+                          </svg>`
+                },
+                hdd: {
+                    bg: "from-slate-100 to-indigo-50",
+                    svg: `<svg viewBox="0 0 200 140" class="w-36 h-28 drop-shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <rect x="56" y="16" width="88" height="108" rx="12" fill="#1E293B"/>
+                            <rect x="62" y="22" width="76" height="96" rx="8" fill="#0F172A"/>
+                            <circle cx="100" cy="62" r="24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-dasharray="110 25"/>
+                            <circle cx="100" cy="62" r="8" fill="#334155" stroke="#64748B" stroke-width="2"/>
+                            <circle cx="124" cy="104" r="3" fill="#25D366"/>
+                            <rect x="74" y="102" width="28" height="4" rx="2" fill="#475569"/>
+                          </svg>`
+                },
+                ssd: {
+                    bg: "from-blue-50 to-cyan-50",
+                    svg: `<svg viewBox="0 0 200 140" class="w-36 h-28 drop-shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <rect x="44" y="36" width="112" height="68" rx="10" fill="#0F172A" stroke="#2563EB" stroke-width="2"/>
+                            <rect x="56" y="48" width="44" height="44" rx="6" fill="#1E293B"/>
+                            <path d="M68 70 L78 60 L88 70 L78 80 Z" fill="#3B82F6"/>
+                            <rect x="110" y="52" width="32" height="6" rx="3" fill="#64748B"/>
+                            <rect x="110" y="64" width="24" height="6" rx="3" fill="#475569"/>
+                            <rect x="110" y="78" width="16" height="6" rx="3" fill="#25D366"/>
+                          </svg>`
+                },
+                usb: {
+                    bg: "from-slate-100 to-sky-50",
+                    svg: `<svg viewBox="0 0 200 140" class="w-36 h-28 drop-shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <rect x="68" y="20" width="64" height="28" rx="4" fill="#94A3B8"/>
+                            <rect x="78" y="26" width="14" height="10" rx="2" fill="#334155"/>
+                            <rect x="108" y="26" width="14" height="10" rx="2" fill="#334155"/>
+                            <rect x="62" y="46" width="76" height="72" rx="10" fill="#0F172A" stroke="#2563EB" stroke-width="2"/>
+                            <circle cx="100" cy="102" r="6" fill="none" stroke="#64748B" stroke-width="2"/>
+                          </svg>`
+                },
+                charger: {
+                    bg: "from-amber-50/70 to-slate-100",
+                    svg: `<svg viewBox="0 0 200 140" class="w-36 h-28 drop-shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <rect x="58" y="34" width="68" height="72" rx="12" fill="#1E293B"/>
+                            <rect x="34" y="50" width="24" height="10" rx="4" fill="#94A3B8"/>
+                            <rect x="34" y="80" width="24" height="10" rx="4" fill="#94A3B8"/>
+                            <path d="M126 70 H148 C158 70 162 76 162 86 V112" fill="none" stroke="#334155" stroke-width="5" stroke-linecap="round"/>
+                            <path d="M92 54 L84 70 H94 L88 86 L102 68 H92 L92 54 Z" fill="#FBBF24"/>
+                          </svg>`
+                },
+                adapter: {
+                    bg: "from-slate-100 to-emerald-50/60",
+                    svg: `<svg viewBox="0 0 200 140" class="w-36 h-28 drop-shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <rect x="54" y="46" width="104" height="48" rx="8" fill="#334155"/>
+                            <rect x="64" y="62" width="16" height="14" rx="2" fill="#0F172A"/>
+                            <rect x="86" y="62" width="16" height="14" rx="2" fill="#0F172A"/>
+                            <rect x="108" y="62" width="22" height="14" rx="2" fill="#2563EB"/>
+                            <path d="M54 70 H30" stroke="#475569" stroke-width="5"/>
+                            <rect x="16" y="63" width="16" height="14" rx="3" fill="#94A3B8"/>
+                          </svg>`
+                },
+                mouse: {
+                    bg: "from-slate-100 to-purple-50/60",
+                    svg: `<svg viewBox="0 0 200 140" class="w-36 h-28 drop-shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <rect x="74" y="20" width="52" height="100" rx="26" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+                            <line x1="74" y1="56" x2="126" y2="56" stroke="#334155" stroke-width="2"/>
+                            <line x1="100" y1="20" x2="100" y2="56" stroke="#334155" stroke-width="2"/>
+                            <rect x="96" y="30" width="8" height="16" rx="4" fill="#2563EB"/>
+                          </svg>`
+                },
+                keyboard: {
+                    bg: "from-slate-100 to-blue-50",
+                    svg: `<svg viewBox="0 0 200 140" class="w-36 h-28 drop-shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <rect x="22" y="40" width="156" height="60" rx="8" fill="#0F172A"/>
+                            <g fill="#334155">
+                                <rect x="32" y="50" width="14" height="10" rx="2"/><rect x="50" y="50" width="14" height="10" rx="2"/>
+                                <rect x="68" y="50" width="14" height="10" rx="2"/><rect x="86" y="50" width="14" height="10" rx="2"/>
+                                <rect x="104" y="50" width="14" height="10" rx="2"/><rect x="122" y="50" width="14" height="10" rx="2"/>
+                                <rect x="140" y="50" width="28" height="10" rx="2"/>
+                                <rect x="32" y="65" width="20" height="10" rx="2"/><rect x="56" y="65" width="14" height="10" rx="2"/>
+                                <rect x="74" y="65" width="14" height="10" rx="2"/><rect x="92" y="65" width="14" height="10" rx="2"/>
+                                <rect x="110" y="65" width="14" height="10" rx="2"/><rect x="128" y="65" width="40" height="10" rx="2"/>
+                                <rect x="32" y="80" width="22" height="10" rx="2"/><rect x="58" y="80" width="68" height="10" rx="2" fill="#2563EB"/>
+                                <rect x="130" y="80" width="38" height="10" rx="2"/>
+                            </g>
+                          </svg>`
+                },
+                mousepad: {
+                    bg: "from-slate-100 to-emerald-50",
+                    svg: `<svg viewBox="0 0 200 140" class="w-36 h-28 drop-shadow-md transition-transform duration-300 group-hover:scale-105">
+                            <rect x="24" y="28" width="152" height="84" rx="10" fill="#0F172A" stroke="#2563EB" stroke-width="2.5" stroke-dasharray="6 3"/>
+                            <rect x="122" y="46" width="32" height="52" rx="16" fill="#1E293B" stroke="#475569" stroke-width="1.5"/>
+                            <rect x="136" y="54" width="4" height="10" rx="2" fill="#25D366"/>
+                          </svg>`
+                }
+            };
+
+            const selected = designs[vType] || designs.laptop;
+            return `
+                <div class="w-full h-44 bg-gradient-to-br ${selected.bg} flex items-center justify-center relative overflow-hidden border-b border-slate-100">
+                    ${selected.svg}
+                </div>
+            `;
+        }
+
+        // 5. FORMATAGE PRIX EN FCFA
+        function formatFCFA(amount) {
+            return new Intl.NumberFormat('fr-FR').format(amount) + ' FCFA';
+        }
+
+        // 6. RENDU DES CATÉGORIES
+        function renderCategories() {
+            const container = document.getElementById('category-filters');
+            container.innerHTML = CATEGORIES.map(cat => {
+                const isActive = currentCategory === cat.id;
+                return `
+                    <button 
+                        onclick="selectCategory('${cat.id}')"
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition shrink-0 ${
+                            isActive 
+                            ? 'bg-[#0F172A] text-white shadow-sm' 
+                            : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                        }"
+                    >
+                        <i data-lucide="${cat.icon}" class="w-4 h-4 ${isActive ? 'text-blue-400' : 'text-slate-400'}"></i>
+                        <span>${cat.label}</span>
+                    </button>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        // 7. RENDU DE LA GRILLE DE PRODUITS
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const emptyState = document.getElementById('empty-state');
+            const resultsCount = document.getElementById('results-count');
+
+            // Filtrage
+            let filtered = products.filter(p => {
+                const matchCat = currentCategory === "Tout" || p.category === currentCategory;
+                const searchLower = currentSearch.toLowerCase().trim();
+                const matchSearch = !searchLower || 
+                    p.name.toLowerCase().includes(searchLower) ||
+                    p.shortSpecs.toLowerCase().includes(searchLower) ||
+                    p.category.toLowerCase().includes(searchLower) ||
+                    p.description.toLowerCase().includes(searchLower);
+                return matchCat && matchSearch;
+            });
+
+            // Tri
+            if (currentSort === "price-asc") {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (currentSort === "price-desc") {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+
+            resultsCount.textContent = `${filtered.length} produit${filtered.length > 1 ? 's' : ''}`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = "";
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(product => {
+                const isNew = product.condition === "Neuf";
+                return `
+                    <article class="group bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-blue-200 transition-all duration-300 flex flex-col overflow-hidden">
+                        <!-- Zone Visuelle + Badges -->
+                        <div class="relative cursor-pointer" onclick="openProductModal(${product.id})">
+                            ${getProductVisual(product)}
+                            
+                            <!-- Badges supérieurs -->
+                            <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                                <span class="px-2.5 py-1 rounded-lg text-[11px] font-bold shadow-xs ${
+                                    isNew 
+                                    ? 'bg-blue-600 text-white' 
+                                    : 'bg-amber-100 text-amber-900 border border-amber-200'
+                                }">
+                                    ${product.condition}
+                                </span>
+                                <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> En stock
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Infos Produit -->
+                        <div class="p-4 sm:p-5 flex-1 flex flex-col">
+                            <div class="text-[11px] font-semibold text-[#2563EB] uppercase tracking-wider mb-1">
+                                ${product.category}
+                            </div>
+                            <h3 onclick="openProductModal(${product.id})" class="font-bold text-base text-[#0F172A] group-hover:text-[#2563EB] transition cursor-pointer line-clamp-2">
+                                ${product.name}
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1.5 line-clamp-2 leading-relaxed">
+                                ${product.shortSpecs}
+                            </p>
+
+                            <!-- Prix & Boutons en bas -->
+                            <div class="mt-auto pt-4">
+                                <div class="text-lg sm:text-xl font-extrabold text-[#0F172A] mb-3">
+                                    ${formatFCFA(product.price)}
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button 
+                                        onclick="openProductModal(${product.id})"
+                                        class="px-3 py-2.5 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition"
+                                    >
+                                        <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                        <span>Détails</span>
+                                    </button>
+                                    <button 
+                                        onclick="addToCart(${product.id})"
+                                        class="px-3 py-2.5 rounded-xl bg-[#2563EB] hover:bg-blue-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition active:scale-95"
+                                    >
+                                        <i data-lucide="plus" class="w-4 h-4"></i>
+                                        <span>Ajouter</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        // 8. GESTION FILTRES & RECHERCHE
+        function selectCategory(category) {
+            currentCategory = category;
+            renderCategories();
+            renderProducts();
+        }
+
+        function handleSearch(val) {
+            currentSearch = val;
+            document.getElementById('search-input-desktop').value = val;
+            document.getElementById('search-input-mobile').value = val;
+            
+            document.getElementById('clear-search-desktop').classList.toggle('hidden', !val);
+            document.getElementById('clear-search-mobile').classList.toggle('hidden', !val);
+            
+            renderProducts();
+        }
+
+        function clearSearch() {
+            handleSearch("");
+        }
+
+        function handleSort(val) {
+            currentSort = val;
+            renderProducts();
+        }
+
+        function resetFilters(e) {
+            if (e) e.preventDefault();
+            currentCategory = "Tout";
+            currentSearch = "";
+            currentSort = "featured";
+            document.getElementById('search-input-desktop').value = "";
+            document.getElementById('search-input-mobile').value = "";
+            document.getElementById('sort-select').value = "featured";
+            document.getElementById('clear-search-desktop').classList.add('hidden');
+            document.getElementById('clear-search-mobile').classList.add('hidden');
+            renderCategories();
+            renderProducts();
+        }
+
+        // 9. MODALE DÉTAILS PRODUIT
+        function openProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const modal = document.getElementById('product-modal');
+            const content = document.getElementById('product-modal-content');
+            const isNew = product.condition === "Neuf";
+
+            let specsHtml = '';
+            if (product.fullSpecs) {
+                specsHtml = `
+                    <div class="mt-5">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Fiche technique</h4>
+                        <div class="bg-slate-50 rounded-xl border border-slate-200/80 divide-y divide-slate-200/80 text-xs sm:text-sm">
+                            ${Object.entries(product.fullSpecs).map(([key, val]) => `
+                                <div class="px-3.5 py-2.5 flex justify-between gap-4">
+                                    <span class="text-slate-500 font-medium">${key}</span>
+                                    <span class="text-slate-800 font-semibold text-right">${val}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            content.innerHTML = `
+                <div class="relative">
+                    <button onclick="closeProductModal()" class="absolute top-3 right-3 z-10 p-2 bg-white/90 hover:bg-white text-slate-700 rounded-full shadow-md transition">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                    ${getProductVisual(product)}
+                </div>
+                <div class="p-5 sm:p-6">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="text-xs font-bold text-[#2563EB] uppercase">${product.category}</span>
+                        <span class="text-slate-300">•</span>
+                        <span class="px-2 py-0.5 rounded-md text-xs font-semibold ${isNew ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-800'}">
+                            ${product.condition}
+                        </span>
+                        <span class="px-2 py-0.5 rounded-md text-xs font-semibold bg-emerald-100 text-emerald-800">
+                            En stock
+                        </span>
+                    </div>
+
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-[#0F172A]">${product.name}</h2>
+                    <div class="text-2xl font-extrabold text-[#2563EB] mt-2">${formatFCFA(product.price)}</div>
+                    
+                    <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                        ${product.description}
+                    </p>
+
+                    ${specsHtml}
+
+                    <div class="mt-6 pt-4 border-t border-slate-200 flex flex-col sm:flex-row gap-3">
+                        <button onclick="addToCart(${product.id}); closeProductModal();" class="flex-1 py-3 px-4 bg-[#0F172A] hover:bg-slate-800 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                            <span>Ajouter au panier</span>
+                        </button>
+                        <button onclick="orderSingleProductWhatsApp(${product.id})" class="flex-1 py-3 px-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 shadow-md transition">
+                            <i data-lucide="message-circle" class="w-4 h-4 fill-current"></i>
+                            <span>Commander sur WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('product-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeProductModal();
+        });
+
+        // 10. GESTION DU PANIER (CART)
+        function saveCart() {
+            localStorage.setItem('niasotac_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    condition: product.condition,
+                    qty: 1
+                });
+            }
+
+            saveCart();
+            showToast(`"${product.name}" ajouté au panier`);
+        }
+
+        function updateCartQty(productId, delta) {
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex === -1) return;
+
+            cart[itemIndex].qty += delta;
+            if (cart[itemIndex].qty <= 0) {
+                cart.splice(itemIndex, 1);
+            }
+            saveCart();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            document.getElementById('cart-badge').textContent = totalItems;
+            document.getElementById('drawer-cart-count').textContent = totalItems;
+            document.getElementById('cart-total-price').textContent = formatFCFA(totalPrice);
+
+            const container = document.getElementById('cart-items-container');
+            const formSection = document.getElementById('checkout-form-section');
+            const footer = document.getElementById('cart-footer');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400">
+                            <i data-lucide="shopping-cart" class="w-8 h-8"></i>
+                        </div>
+                        <p class="font-bold text-slate-700">Votre panier est vide</p>
+                        <p class="text-xs text-slate-500 mt-1">Ajoutez des articles du catalogue pour passer commande.</p>
+                        <button onclick="toggleCart(false)" class="mt-4 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition">
+                            Continuer mes achats
+                        </button>
+                    </div>
+                `;
+                formSection.classList.add('hidden');
+                footer.classList.add('hidden');
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-start justify-between gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-[#0F172A] truncate">${item.name}</h4>
+                            <span class="text-[11px] text-slate-500">${item.condition} • ${formatFCFA(item.price)} / unité</span>
+                            <div class="text-xs sm:text-sm font-extrabold text-[#2563EB] mt-1">
+                                ${formatFCFA(item.price * item.qty)}
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col items-end gap-2">
+                            <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-red-500 transition" title="Supprimer">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                            <div class="flex items-center bg-white border border-slate-200 rounded-lg">
+                                <button onclick="updateCartQty(${item.id}, -1)" class="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-l-lg font-bold">-</button>
+                                <span class="w-7 text-center text-xs font-bold">${item.qty}</span>
+                                <button onclick="updateCartQty(${item.id}, 1)" class="w-7 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-r-lg font-bold">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                formSection.classList.remove('hidden');
+                footer.classList.remove('hidden');
+            }
+
+            lucide.createIcons();
+        }
+
+        function toggleCart(open) {
+            const overlay = document.getElementById('cart-overlay');
+            const drawer = document.getElementById('cart-drawer');
+
+            if (open) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => drawer.classList.remove('translate-x-full'), 10);
+            } else {
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        // 11. GÉNÉRATION DE LA COMMANDE WHATSAPP VERS NIASOTAC TECHNOLOGIE
+        function sendWhatsAppOrder() {
+            if (cart.length === 0) return;
+
+            const clientName = document.getElementById('client-name').value.trim();
+            const clientLocation = document.getElementById('client-location').value.trim();
+            const deliveryMode = document.querySelector('input[name="delivery-mode"]:checked').value;
+
+            if (!clientName || !clientLocation) {
+                showToast("⚠️ Veuillez renseigner votre nom et votre quartier/ville.", true);
+                if (!clientName) document.getElementById('client-name').focus();
+                else document.getElementById('client-location').focus();
+                return;
+            }
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            let message = `Bonjour *${storeConfig.storeName}* 👋,\n`;
+            message += `Je souhaite passer la commande suivante depuis votre catalogue en ligne :\n\n`;
+            message += `🛒 *ARTICLES COMMANDÉS :*\n`;
+
+            cart.forEach((item, idx) => {
+                message += `${idx + 1}. *${item.name}* (${item.condition})\n`;
+                message += `   • Quantité : ${item.qty}\n`;
+                message += `   • Prix unitaire : ${formatFCFA(item.price)}\n`;
+                message += `   • Sous-total : *${formatFCFA(item.price * item.qty)}*\n`;
+            });
+
+            message += `\n💰 *TOTAL ESTIMÉ : ${formatFCFA(totalPrice)}*\n\n`;
+            message += `📍 *INFORMATIONS DE LIVRAISON :*\n`;
+            message += `• Nom client : ${clientName}\n`;
+            message += `• Quartier / Ville : ${clientLocation}\n`;
+            message += `• Mode de réception : ${deliveryMode}\n\n`;
+            message += `Merci de me confirmer la disponibilité et la livraison !`;
+
+            const cleanNumber = storeConfig.whatsappNumber.replace(/\D/g, '');
+            const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(url, '_blank');
+        }
+
+        function orderSingleProductWhatsApp(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            let message = `Bonjour *${storeConfig.storeName}* 👋,\n`;
+            message += `Je souhaite commander cet article vu sur votre catalogue :\n\n`;
+            message += `🔹 *${product.name}* (${product.condition})\n`;
+            message += `🔹 Prix : *${formatFCFA(product.price)}*\n\n`;
+            message += `Est-il disponible immédiatement ?`;
+
+            const cleanNumber = storeConfig.whatsappNumber.replace(/\D/g, '');
+            const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function contactDirectWhatsApp() {
+            const message = `Bonjour *${storeConfig.storeName}* 👋, je vous contacte depuis votre site catalogue pour un renseignement sur vos articles électroniques.`;
+            const cleanNumber = storeConfig.whatsappNumber.replace(/\D/g, '');
+            window.open(`https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // 12. PANNEAU ADMIN / CONFIGURATION
+        function applyStoreConfig() {
+            const formattedPhone = formatBeninPhoneDisplay(storeConfig.whatsappNumber);
+            const cleanNumber = storeConfig.whatsappNumber.replace(/\D/g, '');
+
+            document.getElementById('header-store-name').textContent = storeConfig.storeName;
+            document.getElementById('footer-store-name').textContent = storeConfig.storeName;
+            document.title = `${storeConfig.storeName} | Catalogue Électronique & Informatique`;
+
+            document.getElementById('top-whatsapp-display').textContent = `WhatsApp : ${formattedPhone}`;
+            document.getElementById('top-whatsapp-link').href = `https://wa.me/${cleanNumber}`;
+            document.getElementById('header-phone-text').textContent = formattedPhone;
+            document.getElementById('header-btn-phone').textContent = formattedPhone;
+            document.getElementById('hero-phone').textContent = formattedPhone;
+            document.getElementById('footer-whatsapp-display').textContent = `WhatsApp : ${formattedPhone}`;
+            document.getElementById('floating-wa-text').textContent = formattedPhone;
+            document.getElementById('drawer-phone-label').textContent = formattedPhone;
+        }
+
+        function openAdminModal() {
+            document.getElementById('admin-store-name').value = storeConfig.storeName;
+            document.getElementById('admin-whatsapp-number').value = storeConfig.whatsappNumber;
+            const modal = document.getElementById('admin-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeAdminModal() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function saveStoreSettings() {
+            const newName = document.getElementById('admin-store-name').value.trim();
+            let newNumber = document.getElementById('admin-whatsapp-number').value.trim().replace(/\D/g, '');
+
+            if (!newName || !newNumber) {
+                showToast("⚠️ Veuillez remplir le nom et le numéro WhatsApp.", true);
+                return;
+            }
+
+            // Ajout automatique de l'indicatif 229 si l'utilisateur saisit uniquement 0196145557
+            if (newNumber.length === 10 && newNumber.startsWith('01')) {
+                newNumber = '229' + newNumber;
+            }
+
+            storeConfig.storeName = newName;
+            storeConfig.whatsappNumber = newNumber;
+            localStorage.setItem('niasotac_config', JSON.stringify(storeConfig));
+            
+            applyStoreConfig();
+            closeAdminModal();
+            showToast("✅ Paramètres NIASOTAC TECHNOLOGIE mis à jour !");
+        }
+
+        function addNewProduct() {
+            const name = document.getElementById('new-prod-name').value.trim();
+            const category = document.getElementById('new-prod-category').value;
+            const condition = document.getElementById('new-prod-condition').value;
+            const price = parseInt(document.getElementById('new-prod-price').value, 10);
+            const shortSpecs = document.getElementById('new-prod-specs').value.trim();
+            const imageUrl = document.getElementById('new-prod-image').value.trim();
+            const description = document.getElementById('new-prod-desc').value.trim() || "Article testé et garanti par NIASOTAC TECHNOLOGIE. Disponible immédiatement.";
+
+            if (!name || isNaN(price) || price <= 0 || !shortSpecs) {
+                showToast("⚠️ Veuillez remplir le nom, le prix et les caractéristiques.", true);
+                return;
+            }
+
+            const newProd = {
+                id: Date.now(),
+                name,
+                category,
+                condition,
+                inStock: true,
+                price,
+                shortSpecs,
+                imageUrl,
+                description,
+                fullSpecs: {
+                    "Catégorie": category,
+                    "État": condition,
+                    "Caractéristiques": shortSpecs,
+                    "Vendeur": storeConfig.storeName
+                }
+            };
+
+            products.unshift(newProd);
+            localStorage.setItem('niasotac_products', JSON.stringify(products));
+
+            document.getElementById('new-prod-name').value = "";
+            document.getElementById('new-prod-price').value = "";
+            document.getElementById('new-prod-specs').value = "";
+            document.getElementById('new-prod-image').value = "";
+            document.getElementById('new-prod-desc').value = "";
+
+            renderProducts();
+            closeAdminModal();
+            showToast(`✅ "${name}" publié dans le catalogue !`);
+        }
+
+        function resetDemoData() {
+            localStorage.removeItem('niasotac_products');
+            localStorage.removeItem('niasotac_config');
+            products = [...DEFAULT_PRODUCTS];
+            storeConfig = { ...DEFAULT_CONFIG };
+            applyStoreConfig();
+            renderProducts();
+            closeAdminModal();
+            showToast("🔄 Catalogue NIASOTAC TECHNOLOGIE réinitialisé.");
+        }
+
+        // 13. SYSTÈME DE NOTIFICATIONS TOAST
+        function showToast(message, isError = false) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `px-4 py-3 rounded-xl shadow-lg text-xs sm:text-sm font-semibold text-white flex items-center justify-center text-center transition-all duration-300 transform translate-y-2 opacity-0 ${
+                isError ? 'bg-red-600' : 'bg-[#0F172A]'
+            }`;
+            toast.textContent = message;
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // 14. INITIALISATION AU CHARGEMENT
+        window.addEventListener('DOMContentLoaded', () => {
+            applyStoreConfig();
+            renderCategories();
+            renderProducts();
+            updateCartUI();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
